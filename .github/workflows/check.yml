@@ -1,0 +1,61 @@
+name: Rustfmt
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - 'main'
+
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
+env:
+  REPO: dracula
+
+jobs:
+  check:
+    runs-on: ["amd64"]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      
+      - name: Run sccache-cache
+        uses: mozilla/sccache-action@eaed7fb9f8fb32adea8bd40d7f276f312de9beaf
+        with:
+          version: "v0.4.0-pre.10"
+
+      - name: Run sccache stat for check
+        shell: bash
+        run: ${SCCACHE_PATH} --show-stats
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4.3.0
+        with:
+          images: ${{ steps.login-ecr.outputs.registry }}/${{ env.REPO }}
+          flavor: |
+            latest=false
+          tags: |
+            type=semver,pattern={{version}}   
+
+      - name: Install rust 1.69.0
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: 1.69.0
+          components: clippy,rustfmt
+
+      - name: Rustfmt
+        run: cargo fmt --check
+
+      - name: Install C Build Environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates bash \
+          curl git time build-essential libc6-dev libpq-dev libssl-dev linux-libc-dev brotli libbrotli-dev \
+          pkgconf sudo cmake xutils-dev zlib1g-dev
+
+#      - name: Clippy
+#        run: cargo clippy -- -D warnings
+#        run: cargo clippy --all-targets --all-features -- -D warnings --no-deps
+

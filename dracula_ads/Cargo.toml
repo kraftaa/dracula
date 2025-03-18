@@ -1,0 +1,42 @@
+[package]
+name = "dracula_ads"
+version = "0.1.0"
+authors = ["Maria Dubyaga <kraftaa@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+aws-sdk-s3 = "1"
+aws-config = "1"
+aws-smithy-types-convert = { version = "*", features = ["convert-chrono"] }
+aws-credential-types ="1"
+aws-smithy-async ="1"
+aws-smithy-types = "1"
+async-std = {version = "1", features = ["attributes"]}
+chrono = { version = "0.4.26", features = ["serde"] }
+csv = "1.1.6"
+diesel = { version = "1.4.7", features = ["numeric", "default", "uuid"] }
+bigdecimal = "0.1.0"
+docopt = "1.0"
+eyre = "0.6"
+futures = "0.3"
+futures-util = "0.3"
+log = "0.4"
+openssl = { version = "0.10.25", features = ["vendored"] }
+openssl-probe = "0.1.2"
+pretty-bytes = "0.2"
+pretty_env_logger = "0.3"
+rayon = "1.0"
+sentry = { version = "0.19.0", default-features = false, features=["backtrace","rustls","transport"] }
+serde = { version = "1.0", features = ["derive"]  }
+serde_json = "1.0"
+time = "0"
+tokio = { version = "1.0", features = ["full"]}
+tokio-stream = "0.1"
+tokio-postgres = "0"
+url = "1.7"
+postgres = "0.9.4"
+dracula_aws = { path = "../dracula_aws" }
+dracula_kube = { path = "../dracula_kube" }
+dracula_tasks = { path = "../dracula_tasks" }
+dracula_schemas = { path = "../dracula_schemas" }
+flate2 = "*"

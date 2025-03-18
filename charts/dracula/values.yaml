@@ -1,0 +1,51 @@
+# Default values for dracula.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: id.dkr.ecr.eu-central-1.amazonaws.com/dracula
+  tag: 0.0.1584
+  pullPolicy: IfNotPresent
+#  pullPolicy: Always
+
+podAnnotations:
+  iam.amazonaws.com/role: k8s-dracula
+
+nodeSelector: {}
+
+tolerations: []
+
+concurrencyPolicy: {}
+
+affinity: {}
+restartPolicy: Never
+serviceAccountName: dracula
+namespace: "production"
+schedule: null
+command:
+  arg1:
+suspend: false
+resources:
+  limits:
+    memory: 20Gi
+  requests:
+    memory: 20Gi
+
+postgres:
+  - db:
+      name: production
+      secret: app-postgres-direct-secret
+      key: POSTGRES_READONLY_URL
+  - db:
+      name: ads
+      secret: ads-postgres-direct-secret
+      key: POSTGRES_URL
+
+cronjobs:
+  - { name: "all",                    schedule: "0 */12 * * *",   suspend: true,  db_name: "production", secret: "app-postgres-direct-secret",    key: POSTGRES_READONLY_URL, command: [' echo START;  kubectl -n datascience delete po jupyter-py; for TASK_GROUP in all streaming_tasks action_items  notes_pg  refs_all refs_providers  embedded_dynamic_forms; do mkdir -p target/debug && time dracula --table=$TASK_GROUP $POSTGRES_URL; done;  echo finish'] }
+  - { name: "boost",                  schedule: "40 01 * * 5",    suspend: true,  db_name: "production", secret: "app-postgres-direct-secret",    key: POSTGRES_URL,          command: [' mkdir -p target/debug && time dracula --file=booster $POSTGRES_URL'] }
+  - { name: "events",                 schedule: "15 08 * * *",    suspend: true,  db_name: "production", secret: "app-postgres-direct-secret",    key: POSTGRES_READONLY_URL, command: [' mkdir -p target/debug && exec time dracula --table=events $POSTGRES_URL'] }
+  - { name: "inventory-items",        schedule: "0 7 * * *",      suspend: true,  db_name: "production", secret: "app-postgres-direct-secret",    key: POSTGRES_READONLY_URL, command: [' mkdir -p target/debug && exec time dracula --table=inventories $POSTGRES_URL'] }
+  - { name: "oneoff",                 schedule: "0 0 29 2 1",     suspend: true,   db_name: "production", secret: "app-postgres-direct-secret",    key: POSTGRES_READONLY_URL, command: [' mkdir -p target/debug && exec time dracula $POSTGRES_URL --table=table_name' ]  }
+  - { name: "ads ",                 schedule: "0 5 * * *",      suspend: true,  db_name: "ads",      secret: "ads-postgres-direct-secret", key: POSTGRES_URL,          command: [' echo "trying ads"; mkdir -p target/debug && exec time dracula $POSTGRES_URL   --ads=ads ' ]  }
+  - { name: "ads-athena ",          schedule: "40 */12 * * *",  suspend: true,  db_name: "ads",      secret: "ads-postgres-direct-secret", key: POSTGRES_URL,          command: [' echo "trying ads-athena"; mkdir -p target/debug && time dracula $POSTGRES_URL --table=ads_streaming ;  echo "finish ads parsing" ' ]  }

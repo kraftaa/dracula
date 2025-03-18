@@ -1,0 +1,17 @@
+[package]
+name = "dracula_schemas"
+version = "0.1.0"
+authors = ["Maria Dubyaga <kraftaa@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+diesel = { version = "1.0.0", features = ["postgres", "32-column-tables", "numeric", "chrono", "uuid", "serde_json", "64-column-tables"] }
+bigdecimal = "0.1.0" # gotta match the diesel version, try `cargo tree`
+chrono = { version = "0.4", features = ["serde"] }
+uuid = "0.6.4"
+dracula_parquet = { path = "../dracula_parquet" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.6.0", features = ["postgres", "runtime-tokio-rustls", "time"]}

@@ -1,0 +1,15 @@
+[workspace]
+members = [
+  "dracula_aws",
+  "dracula_cli",
+  "dracula_kube",
+  "dracula_ads",
+  "dracula_ads_athena",
+  "dracula_parquet",
+  "dracula_schemas",
+  "dracula_tasks",
+  "dracula_partition_dates"
+]
+
+[profile.release]
+lto = "thin"

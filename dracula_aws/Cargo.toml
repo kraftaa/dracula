@@ -1,0 +1,29 @@
+[package]
+name = "dracula_aws"
+version = "0.1.0"
+authors = ["Maria Dubyaga <kraftaa@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+openssl = { version="0.10.0", features = ["vendored"] }
+aws-sdk-s3 = "1"
+aws-sdk-glue = "1"
+aws-sdk-athena = "1"
+aws-config = "1"
+aws-credential-types ="1"
+aws-smithy-async = "1"
+aws-smithy-types = "1"
+aws-smithy-runtime-api = "1"
+chrono = { version = "0.4", features = ["serde"] }
+eyre = "*"
+pin-project = "1"
+futures = "0.3"
+tokio = { version = "1", features=["full"] }
+uuid = { version = "0.6.4", features = ["v4"] }
+sentry = { version = "0.19.0", default-features = false, features=["backtrace","rustls","transport"] }
+csv = "1.1.6"
+serde = { version = "1.0", features = ["derive"]  }
+diesel = "1.4.7"
+flate2 = "*"

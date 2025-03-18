@@ -1,0 +1,16 @@
+.idea
+legacy_scripts
+src
+target/cross/debug
+target/cross/git-cache
+target/cross/registry-cache
+target/cross/release
+target/cross/x86_64-unknown-linux-musl/release/build
+target/cross/x86_64-unknown-linux-musl/release/deps
+target/cross/x86_64-unknown-linux-musl/release/libdracula.rlib
+target/debug
+target/doc
+target/release
+*.tar.gz
+couchdb/
+cargo/

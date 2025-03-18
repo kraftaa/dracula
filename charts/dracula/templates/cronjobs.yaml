@@ -1,0 +1,53 @@
+{{- range $cj := .Values.cronjobs }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $.Release.Name }}-{{ $cj.name }}
+  labels:
+    app: dracula
+    task: helm
+spec:
+  schedule: "{{ $cj.schedule }}"
+  suspend: {{ $cj.suspend }}
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: {{ $cj.concurrencyPolicy | default "Forbid" }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: dracula
+            task: helm
+          annotations:
+            {{- range $key, $value := $.Values.podAnnotations }}
+              {{ $key }}: {{ $value }}
+            {{- end }}
+          namespace: "{{ $.Values.namespace }}"
+        spec:
+          restartPolicy: {{ $.Values.restartPolicy }}
+          serviceAccountName: {{ $.Values.serviceAccountName }}
+          containers:
+            - name: {{ $cj.name }}
+              image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+              imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
+              command:
+                - bash
+                - -c
+                - echo start; {{ $cj.command | join "" }} ; echo end
+              env:
+                - name: POSTGRES_URL
+                  valueFrom:
+                    secretKeyRef:
+                       name: {{ $cj.secret }}
+                       key: {{ $cj.key }}
+              envFrom:
+                - configMapRef:
+                    name: rx
+              resources:
+                limits:
+                  memory: 20Gi
+                requests:
+                  memory: 20Gi
+{{- end}}

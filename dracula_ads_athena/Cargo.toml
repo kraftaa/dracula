@@ -1,0 +1,35 @@
+[package]
+name = "dracula_ads_athena"
+version = "0.1.0"
+edition = "2021"
+authors = ["Maria Dubyaga <kraftaa@gmail.com>"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+bigdecimal = "0.1.0" # gotta match the diesel version, try `cargo tree`
+chrono = { version = "0.4", features = ["serde"] }
+diesel = { version = "1.0.0", features = ["postgres", "32-column-tables", "numeric", "chrono", "uuid", "serde_json", "64-column-tables"] }
+function_name = "0.2.0"
+log = "0"
+multimap = "0"
+openssl = { version = "0.10.25", features = ["vendored"] }
+rayon = "1"
+schema = "0.0.1"
+serde = { version = "1.0", features = ["derive"]  }
+serde_derive = "1.0"
+serde_json = "1.0"
+tokio = { version = "1", features = ["full"]}
+uuid = { version = "0.6.4", features = ["v4"] }
+async-trait = "0.1.51"
+dracula_ads = { path = "../dracula_ads" }
+dracula_schemas = { path = "../dracula_schemas" }
+dracula_parquet = { path = "../dracula_parquet" }
+dracula_tasks = { path = "../dracula_tasks" }
+sqlx = { version = "0.6.0", features = ["postgres", "runtime-tokio-rustls", "time", "chrono", "uuid", "bigdecimal"]}
+futures-util = "*"
+itertools = "0.10.1"
+regex = "*"
+
+

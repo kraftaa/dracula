@@ -1,0 +1,11 @@
+/target
+**/*.rs.bk
+*.ipr
+*.iws
+.idea/
+*.tar.gz
+*.tar
+com.apple.java.util.prefs.plist
+*.qz
+*.parquet
+en/*

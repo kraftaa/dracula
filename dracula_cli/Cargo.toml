@@ -1,0 +1,34 @@
+[package]
+name = "dracula_cli"
+version = "0.1.0"
+authors = ["Xavier Lange <xrlange@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "1"
+async-std = {version = "1", features = ["attributes"]}
+chrono = { version = "0.4", features = ["serde"] }
+diesel = "1.4.7"
+docopt = "1.0"
+eyre = "0.6"
+futures = "0.3"
+glob = "0.3.0"
+log = "0.4"
+openssl = { version = "0.10.25", features = ["vendored"] }
+openssl-probe = "0.1.2"
+pretty-bytes = "0.2"
+pretty_env_logger = "0.3"
+rayon = "1.0"
+sentry = { version = "0.25.0", default-features = false, features = ["backtrace", "contexts", "panic", "surf", "rustls", "log", "test"] }
+serde = { version = "1.0", features = ["derive"]  }
+tokio = { version = "1.0", features = ["full"]}
+url = "1.7"
+dracula_aws = { path = "../dracula_aws" }
+dracula_booster = { path = "../dracula_booster" }
+dracula_kube = { path = "../dracula_kube" }
+dracula_ads = { path = "../dracula_ads" }
+dracula_ads_athena = { path = "../dracula_ads_athena" }
+dracula_parquet = { path = "../dracula_parquet" }
+dracula_schemas = { path = "../dracula_schemas" }
+dracula_tasks = { path = "../dracula_tasks" }
+futures-util = "*"

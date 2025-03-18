@@ -1,0 +1,27 @@
+[package]
+name = "dracula_booster"
+version = "0.1.0"
+authors = ["Maria Dubyaga <kraftaa@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+async-std = {version = "1", features = ["attributes"]}
+chrono = { version = "0.4", features = ["serde"] }
+csv = "1.1.6"
+diesel = { version = "1.4.7", features = ["numeric", "default"] }
+bigdecimal = "0.1.0"
+docopt = "1.0"
+futures = "0.3"
+log = "0.4"
+openssl = { version = "0.10.25", features = ["vendored"] }
+openssl-probe = "0.1.2"
+pretty-bytes = "0.2"
+pretty_env_logger = "0.3"
+rayon = "1.0"
+sentry = { version = "0.19.0", default-features = false, features=["backtrace","rustls","transport"] }
+serde = { version = "1.0", features = ["derive"]  }
+tokio = { version = "1.0", features = ["full"]}
+url = "1.7"
+dracula_aws = { path = "../dracula_aws" }
+dracula_kube = { path = "../dracula_kube" }
+dracula_schemas = { path = "../dracula_schemas" }
