@@ -31,7 +31,7 @@ pub fn organizations(pg_uri: &str) -> (String, i64) {
     let records: Vec<OrganizationRecord> = organizations
         .iter()
         .map(|o| {
-           let webstore = o.webstore.to_string();
+            let webstore = o.webstore.to_string();
 
             OrganizationRecord {
                 id: o.id,

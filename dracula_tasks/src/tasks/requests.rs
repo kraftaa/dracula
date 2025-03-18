@@ -33,9 +33,7 @@ pub fn requests(pg_uri: &str) -> (String, i64) {
     let conn = PgConnection::establish(pg_uri).expect("postgres conn");
 
     let requests_load = Instant::now();
-    let requests = requests_dsl::requests
-        .load::<Request>(&conn)
-        .unwrap();
+    let requests = requests_dsl::requests.load::<Request>(&conn).unwrap();
     trace!("load requests took: {:?}", requests_load.elapsed());
 
     let path = "/tmp/requests.parquet";
@@ -72,7 +70,6 @@ pub fn requests(pg_uri: &str) -> (String, i64) {
             } else {
                 None
             };
-
 
             let on_hold = req.on_hold;
             let cancelled = req.cancelled;

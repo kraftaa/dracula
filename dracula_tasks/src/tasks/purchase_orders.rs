@@ -1,8 +1,7 @@
 use super::prelude::*;
 use dracula_schemas::tables::{
     action_items::dsl as action_items_dsl, currencies::dsl as currencies_dsl,
-    providers::dsl as providers_dsl, purchase_orders::dsl as po_dsl,
-    orders::dsl as orders_dsl,
+    orders::dsl as orders_dsl, providers::dsl as providers_dsl, purchase_orders::dsl as po_dsl,
     shippings::dsl as shippings_dsl, taxes::dsl as taxes_dsl,
 };
 use rayon::prelude::*;
@@ -77,10 +76,8 @@ pub fn purchase_orders(pg_uri: &str) -> (String, i64) {
         ppo_base_load.elapsed()
     );
 
-    let ad_po_number_by_purchase_order_id: HashMap<i32, &PurchaseOrder> = ppo_base
-        .iter()
-        .map(|x| (x.cpo_id.unwrap(), x))
-        .collect();
+    let ad_po_number_by_purchase_order_id: HashMap<i32, &PurchaseOrder> =
+        ppo_base.iter().map(|x| (x.cpo_id.unwrap(), x)).collect();
     println!(
         "Length of HashMap ad_po_number_by_purchase_order_id: {}\n",
         ad_po_number_by_purchase_order_id.len()
@@ -121,10 +118,7 @@ pub fn purchase_orders(pg_uri: &str) -> (String, i64) {
         providers_load.elapsed()
     );
 
-    let order_ids: Vec<_> = purchase_orders
-        .iter()
-        .filter_map(|x| x.order_id)
-        .collect();
+    let order_ids: Vec<_> = purchase_orders.iter().filter_map(|x| x.order_id).collect();
 
     let orders_load = Instant::now();
     let orders: Vec<Order> = orders_dsl::orders
@@ -237,9 +231,7 @@ pub fn purchase_orders(pg_uri: &str) -> (String, i64) {
 
     let records: Vec<PurchaseOrderTaskRecord> = purchase_orders
         .par_iter()
-        .filter(|po| {
-            po.po_number.is_some() && po.po_created_at.is_some()
-        })
+        .filter(|po| po.po_number.is_some() && po.po_created_at.is_some())
         .map(|i| {
             let ad_po_numbers = ad_po_number_by_purchase_order_id.get(&i.id);
 
@@ -262,8 +254,7 @@ pub fn purchase_orders(pg_uri: &str) -> (String, i64) {
             let currency_field = currency.map(|x| x.currency.clone().unwrap());
 
             let total_price = i.total_price.to_f64().expect("big decimal price");
-            let subtotal_price =
-                i.subtotal_price.to_f64().expect("big decimal price");
+            let subtotal_price = i.subtotal_price.to_f64().expect("big decimal price");
 
             let shippings_proposal = shipping_by_proposal_id.get(&i.proposal_id.unwrap_or(0));
             let shipping_cost = if shippings

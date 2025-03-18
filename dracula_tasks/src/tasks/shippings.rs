@@ -25,19 +25,16 @@ pub fn shippings(pg_uri: &str) -> (String, i64) {
 
     let records: Vec<ShippingRecord> = shippings
         .iter()
-        .map(|d| {
-
-            ShippingRecord {
-                id: d.id,
-                shipable_id: d.shipable_id,
-                shipable_type: d.shipable_type.clone(),
-                cost: d.cost.to_f64().expect("big decimal price"),
-                free_shipping: d.free_shipping.to_string(),
-                currency: d.currency.clone(),
-                notes: d.notes.clone(),
-                created_at: d.created_at,
-                updated_at: d.updated_at,
-            }
+        .map(|d| ShippingRecord {
+            id: d.id,
+            shipable_id: d.shipable_id,
+            shipable_type: d.shipable_type.clone(),
+            cost: d.cost.to_f64().expect("big decimal price"),
+            free_shipping: d.free_shipping.to_string(),
+            currency: d.currency.clone(),
+            notes: d.notes.clone(),
+            created_at: d.created_at,
+            updated_at: d.updated_at,
         })
         .collect();
 

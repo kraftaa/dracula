@@ -32,23 +32,20 @@ pub fn taxes(pg_uri: &str) -> (String, i64) {
 
     let records: Vec<TaxesRecord> = taxes
         .iter()
-        .map(|t| {
-
-            TaxesRecord {
-                id: t.id,
-                taxable_id: t.taxable_id,
-                taxable_type: t.taxable_type.clone(),
-                amount: t.amount.to_f64().unwrap(),
-                category: t.category.clone(),
-                currency: t.currency.clone(),
-                description: t.description.clone(),
-                locale: t.locale.clone(),
-                notes: t.notes.clone(),
-                percent_rate: t.percent_rate.to_f64().unwrap(),
-                created_at: t.created_at,
-                updated_at: t.updated_at,
-                type_: t.type_.clone(),
-            }
+        .map(|t| TaxesRecord {
+            id: t.id,
+            taxable_id: t.taxable_id,
+            taxable_type: t.taxable_type.clone(),
+            amount: t.amount.to_f64().unwrap(),
+            category: t.category.clone(),
+            currency: t.currency.clone(),
+            description: t.description.clone(),
+            locale: t.locale.clone(),
+            notes: t.notes.clone(),
+            percent_rate: t.percent_rate.to_f64().unwrap(),
+            created_at: t.created_at,
+            updated_at: t.updated_at,
+            type_: t.type_.clone(),
         })
         .collect();
 

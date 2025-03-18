@@ -3,8 +3,7 @@ use std::collections::HashMap;
 use std::str;
 
 use dracula_schemas::tables::{
-    providers::dsl as providers_dsl, requests::dsl as requests_dsl,
-    orders::dsl as orders_dsl,
+    orders::dsl as orders_dsl, providers::dsl as providers_dsl, requests::dsl as requests_dsl,
     timepoints::dsl as time_dsl, users::dsl as users_dsl,
 };
 
@@ -50,14 +49,8 @@ pub fn orders(pg_uri: &str) -> (String, i64) {
     let providers_load = Instant::now();
     let orders_ids: Vec<i32> = orders.iter().map(|x| x.id).collect();
 
-    let request_ids: Vec<i32> = orders
-        .iter()
-        .map(|x| x.request_id.unwrap())
-        .collect();
-    let provider_ids: Vec<i32> = orders
-        .iter()
-        .map(|x| x.provider_id.unwrap_or(0))
-        .collect();
+    let request_ids: Vec<i32> = orders.iter().map(|x| x.request_id.unwrap()).collect();
+    let provider_ids: Vec<i32> = orders.iter().map(|x| x.provider_id.unwrap_or(0)).collect();
 
     let providers = providers_dsl::providers
         .filter(providers_dsl::id.eq(any(&provider_ids[..])))
@@ -82,8 +75,7 @@ pub fn orders(pg_uri: &str) -> (String, i64) {
 
     let users_by_user_id: HashMap<i32, &User> = users.iter().map(|x| (x.id, x)).collect();
 
-    let requests_by_id: HashMap<i32, &Request> =
-        requests.iter().map(|x| (x.id, x)).collect();
+    let requests_by_id: HashMap<i32, &Request> = requests.iter().map(|x| (x.id, x)).collect();
 
     let timepoints_load = Instant::now();
     let timepoints = time_dsl::timepoints
@@ -97,10 +89,7 @@ pub fn orders(pg_uri: &str) -> (String, i64) {
     let records: Vec<OrderTaskRecord> = orders
         .par_iter()
         .map(|order| {
-            let obligations = order
-                .obligations
-                .as_ref()
-                .map(|l| l.clone().to_string());
+            let obligations = order.obligations.as_ref().map(|l| l.clone().to_string());
 
             let provider = providers_by_provider_id.get(&order.provider_id.unwrap_or(0));
             let provider_name = if let Some(p) = provider {
@@ -170,7 +159,8 @@ pub fn orders(pg_uri: &str) -> (String, i64) {
                 None
             };
 
-            let booster =  order.booster
+            let booster = order
+                .booster
                 .map(|cr| cr.to_f64().expect("bigdecimal to f64"))
                 .expect("Unwrapping booster in Order");
 

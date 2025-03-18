@@ -1,5 +1,5 @@
 use bigdecimal::BigDecimal;
-use chrono::{NaiveDateTime};
+use chrono::NaiveDateTime;
 
 #[derive(Queryable, Debug)]
 pub struct Milestone {

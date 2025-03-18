@@ -81,10 +81,7 @@ pub fn streaming_tasks_list() -> Vec<(&'static str, Box<dyn DraculaStreamingTask
             "refs_providers",
             Box::new(dracula_tasks::tasks::RefsPrStreamingTask {}),
         ),
-        (
-            "wpcs",
-            Box::new(dracula_tasks::tasks::WPCStreamingTask {}),
-        ),
+        ("wpcs", Box::new(dracula_tasks::tasks::WPCStreamingTask {})),
     ];
     streaming_tasks
 }
@@ -114,24 +111,15 @@ pub fn tasks_list() -> Vec<(&'static str, Box<dyn DraculaTask>)> {
             "purchase_orders",
             Box::new(dracula_tasks::tasks::PurchaseOrderTask {}),
         ),
-        (
-            "requests",
-            Box::new(dracula_tasks::tasks::RequestTask {}),
-        ),
-        (
-            "orders",
-            Box::new(dracula_tasks::tasks::OrderTask {}),
-        ),
+        ("requests", Box::new(dracula_tasks::tasks::RequestTask {})),
+        ("orders", Box::new(dracula_tasks::tasks::OrderTask {})),
         (
             "refs_users",
             Box::new(dracula_tasks::tasks::RefsUserTaskPart {}),
         ),
         ("shippings", Box::new(dracula_tasks::tasks::ShippingTask {})),
         ("taxes", Box::new(dracula_tasks::tasks::TaxTask {})),
-        (
-            "users",
-            Box::new(dracula_tasks::tasks::UserTask {}),
-        ),
+        ("users", Box::new(dracula_tasks::tasks::UserTask {})),
         ("wares", Box::new(dracula_tasks::tasks::WareTask {})),
     ];
     tasks

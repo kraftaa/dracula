@@ -69,15 +69,15 @@ impl PurchaseOrder {
     }
 
     pub fn retail_subtotal_price(&self, milestones: &[&Milestone]) -> BigDecimal {
-        milestones.iter().fold(BigDecimal::from(0), |acc, m| {
-            acc + m.total_price.clone()
-        })
+        milestones
+            .iter()
+            .fold(BigDecimal::from(0), |acc, m| acc + m.total_price.clone())
     }
 
     pub fn retail_subtotal_tax_amount(&self, milestones: &[&Milestone]) -> BigDecimal {
-        milestones.iter().fold(BigDecimal::from(0), |acc, m| {
-            acc + m.total_tax_amount()
-        })
+        milestones
+            .iter()
+            .fold(BigDecimal::from(0), |acc, m| acc + m.total_tax_amount())
     }
 
     pub fn retail_total_price(&self, milestones: &[&Milestone], shipping: &Shipping) -> BigDecimal {

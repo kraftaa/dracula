@@ -170,8 +170,7 @@ pub fn proposals(pg_uri: &str) -> (String, i64) {
                 .unwrap();
 
             let total_price = p.total_price.to_f64().expect("big decimal price");
-            let subtotal_price =
-                p.subtotal_price.to_f64().expect("big decimal price");
+            let subtotal_price = p.subtotal_price.to_f64().expect("big decimal price");
 
             let total_price_no_tax = if p.created_at > Some(tax_date) {
                 total_price - tax.unwrap_or(0.0)
@@ -210,7 +209,6 @@ pub fn proposals(pg_uri: &str) -> (String, i64) {
             let obsoleted = p.obsoleted.to_string();
             let state = p.state.clone();
             let commission_rate = p.commission_rate.as_ref().map(|l| l.to_f64().unwrap());
-
 
             ProposalsRecordPage {
                 id: p.id,

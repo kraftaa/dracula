@@ -20,8 +20,8 @@ struct MilestoneRecord {
     comments: Option<String>,
     created_at: Option<NaiveDateTime>,
     updated_at: Option<NaiveDateTime>,
-    unit_price: f64,         // BigDecimal,
-    total_price: f64,         // BigDecimal,
+    unit_price: f64,  // BigDecimal,
+    total_price: f64, // BigDecimal,
     status: Option<String>,
     provider_id: Option<i32>,
     cancelled_at: Option<NaiveDateTime>,
@@ -29,10 +29,12 @@ struct MilestoneRecord {
     estimated_date: Option<NaiveDate>,
 }
 fn date_at_or_placeholder(date: Option<NaiveDateTime>) -> NaiveDateTime {
-    date.unwrap_or_else(|| NaiveDateTime::new(
-        NaiveDate::from_ymd_opt(1, 1, 1).unwrap(),
-        chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
-    ))
+    date.unwrap_or_else(|| {
+        NaiveDateTime::new(
+            NaiveDate::from_ymd_opt(1, 1, 1).unwrap(),
+            chrono::NaiveTime::from_hms_opt(0, 0, 0).unwrap(),
+        )
+    })
 }
 
 fn estimated_date_placeholder(date: Option<NaiveDate>) -> NaiveDate {
@@ -82,7 +84,6 @@ pub fn milestones(pg_uri: &str) -> (String, i64) {
                 estimated_date: Some(estimated_date_placeholder(
                     m.estimated_date.map(|dt| dt.date()),
                 )),
-
             }
         })
         .collect();

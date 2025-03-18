@@ -116,11 +116,8 @@ pub fn events_emails(pg_uri: &str) -> Vec<(NaiveDate, PathBuf, u128, i64)> {
                     .as_ref()
                     .and_then(|session_id| emails_by_session.get(session_id));
 
-                let full_email = emails.map(|x| {
-                    x
-                        .clone()
-                        .expect("Unwrapping emails in session_ids")
-                });
+                let full_email =
+                    emails.map(|x| x.clone().expect("Unwrapping emails in session_ids"));
 
                 EventEmailRecord {
                     id: m.id,

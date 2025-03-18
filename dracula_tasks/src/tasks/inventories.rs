@@ -42,7 +42,7 @@ pub async fn inventories(pg_uri: &str) -> anyhow::Result<(String, i64)> {
     let file = std::fs::File::create(path).unwrap();
     let mut pfile = SerializedFileWriter::new(file, schema, props()).unwrap();
 
-     let query = "select id, inventory_group_id, data::varchar, created_at, updated_at, \
+    let query = "select id, inventory_group_id, data::varchar, created_at, updated_at, \
      product_name, product_url, provider_id,\
      uuid::varchar from inventories";
 
