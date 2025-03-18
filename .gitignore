@@ -7,5 +7,5 @@
 *.tar
 com.apple.java.util.prefs.plist
 *.qz
+*dump
 *.parquet
-en/*

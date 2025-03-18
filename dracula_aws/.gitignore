@@ -3,16 +3,9 @@
 *.ipr
 *.iws
 .idea/
-expanded.rs
-XAVIER_NOTES.md
-couchdb/
 *.tar.gz
 *.tar
 com.apple.java.util.prefs.plist
 *.qz
-/postgres.dump
-kubernetes/dracula-oneoff-job2.yml
 *dump
-/big-tables
 *.parquet
-en/*
