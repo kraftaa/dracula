@@ -2,7 +2,6 @@ use chrono::NaiveDateTime;
 use uuid::Uuid;
 
 #[derive(Queryable, Debug)]
-#[allow(dead_code)]
 pub struct ActionItem {
     pub id: i64,
     pub action_performed: Option<String>,

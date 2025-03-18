@@ -2,7 +2,6 @@ use chrono::NaiveDateTime;
 use uuid::Uuid;
 
 #[derive(Queryable, Debug)]
-#[allow(dead_code)]
 pub struct Request {
     pub id: i32,
     pub name: Option<String>,

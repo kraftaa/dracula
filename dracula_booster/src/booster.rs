@@ -7,7 +7,6 @@ use dracula_aws::aws::{download, get_execution_id};
 use serde::Deserialize;
 use tokio::time::Instant;
 #[derive(Queryable, Debug, Default, Deserialize)]
-#[allow(dead_code)]
 pub struct Booster {
     pub id: i64,
     pub organization_id: i32,

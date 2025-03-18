@@ -2,7 +2,6 @@ use bigdecimal::BigDecimal;
 use chrono::{NaiveDateTime};
 
 #[derive(Queryable, Debug)]
-#[allow(dead_code)]
 pub struct Milestone {
     pub id: i32,
     pub itemizable_id: Option<i32>,

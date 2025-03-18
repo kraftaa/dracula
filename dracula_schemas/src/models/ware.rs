@@ -2,7 +2,6 @@ use chrono::NaiveDateTime;
 use dracula_parquet::prelude::*;
 
 #[derive(Queryable, Debug, ParquetRecordWriter, Default, sqlx::FromRow)]
-#[allow(dead_code)]
 pub struct Ware {
     pub id: i32,
     pub name: Option<String>,

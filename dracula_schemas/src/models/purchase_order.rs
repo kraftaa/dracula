@@ -5,7 +5,6 @@ use uuid::Uuid;
 use super::{Currency, Milestone, Shipping};
 
 #[derive(Queryable, Debug)]
-#[allow(dead_code)]
 pub struct PurchaseOrder {
     pub id: i32,
     pub version_number: i32,

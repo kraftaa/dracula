@@ -2,7 +2,6 @@ use chrono::NaiveDateTime;
 use uuid::Uuid;
 
 #[derive(Queryable, Debug)]
-#[allow(dead_code)]
 pub struct Note {
     pub id: i64,
     pub title: Option<String>,

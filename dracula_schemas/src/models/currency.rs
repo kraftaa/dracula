@@ -1,7 +1,6 @@
 use bigdecimal::BigDecimal;
 use chrono::NaiveDateTime;
 
-#[allow(dead_code)]
 #[derive(Queryable, Debug, sqlx::FromRow)]
 pub struct Currency {
     pub id: i32,
