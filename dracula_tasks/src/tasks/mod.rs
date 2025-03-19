@@ -31,6 +31,9 @@ pub use self::requests::*;
 mod notes;
 pub use self::notes::*;
 
+mod page_iter;
+pub use self::page_iter::*;
+
 mod refs_providers;
 pub use self::refs_providers::*;
 
