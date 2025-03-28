@@ -1,10 +1,14 @@
 Dracula
 ===
 
+## Rust-based ETL
+
 A Rust-based ETL pipeline that extracts application data from PostgreSQL and other sources, transforms it into Parquet format, and loads it into AWS Athena for efficient querying.
+
 Rust Version
 ===
-```rustc 1.69.0 (84c898d65 2023-04-16)```
+
+rustc 1.69.0 (84c898d65 2023-04-16)
 
 Setup
 ===
