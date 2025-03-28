@@ -19,9 +19,7 @@ PGUSER     = $(shell bash -c 'kubectl $(CTX) -n production get secret app-postgr
 BACKUP_FILE := production-2019-09-09-full.dump.tar
 #BACKUP_FILE := dracula-dump.tar
 
-TABLES := -t access_tokens \
-   -t action_items \
-   -t addresses \
+TABLES := -t addresses \
    -t currencies \
    -t invoices \
    -t milestones \
