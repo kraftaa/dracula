@@ -1,19 +1,19 @@
 Dracula
 ===
 
-Converts application data from postgres in to parquet! Whoa, spooky!
-
+A Rust-based ETL pipeline that extracts application data from PostgreSQL and other sources, transforms it into Parquet format, and loads it into AWS Athena for efficient querying.
 Rust Version
 ===
-
-    rustup default nightly
+```rustc 1.69.0 (84c898d65 2023-04-16)```
 
 Setup
 ===
 
 ```bash
 # install rust and tooling! change tool to nightly
-curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly-2021-12-09
+curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain 1.69.0
+source $HOME/.cargo/env
+rustc --version
 # install the database tool with support for postgres (you need libpq on your system) 
 cargo install diesel_cli --no-default-features --features "postgres"
 ```
