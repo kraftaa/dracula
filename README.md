@@ -8,7 +8,9 @@ A Rust-based ETL pipeline that extracts application data from PostgreSQL and oth
 Rust Version
 ===
 
+```bash
 rustc 1.69.0 (84c898d65 2023-04-16)
+```
 
 Setup
 ===
